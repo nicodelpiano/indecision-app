@@ -6,54 +6,41 @@ import Action from './Action';
 import Header from './Header';
 
 class IndecisionApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: props.options
-    }
-    this.handleDeleteOptions = this
-      .handleDeleteOptions
-      .bind(this);
+  state = {
+    options: []
+  };
 
-    this.handleAddOption = this
-      .handleAddOption
-      .bind(this);
-
-    this.handlePick = this.handlePick.bind(this);
-    this.handleDeleteOption = this.handleDeleteOption.bind(this);
-  }
-
-  componentDidMount() {
-    console.log('componentDidMount');
-  }
-  componentDidUpdate() {
-    console.log('componentDidUpdate!');
-  }
-
-  handlePick() {
+  handlePick = () => {
     const index = Math.floor(Math.random() * this.state.options.length);
     const selection = this.state.options[index];
     alert(selection);
-  }
+  };
 
-  handleDeleteOptions() {
+  handleDeleteOptions = () => {
     this.setState(() => ({ options: [] }));
-  }
+  };
 
-  handleDeleteOption(optionToRemove) {
+  handleDeleteOption = (optionToRemove) => {
     this.setState((prevState) => ({
       options: prevState.options.filter((option) => optionToRemove !== option)
     }));
-  }
+  };
 
-  handleAddOption(option) {
+  handleAddOption = (option) => {
     if (!option) {
       return 'Enter a valid option!';
     }
     this.setState((prevState) => ({
       options: prevState.options.concat(option)
     }));
-  }
+  };
+
+  componentDidMount() {
+    console.log('componentDidMount');
+  };
+  componentDidUpdate() {
+    console.log('componentDidUpdate!');
+  };
 
   render() {
     const title = 'Indecision';
@@ -71,7 +58,7 @@ class IndecisionApp extends React.Component {
         <AddOption handleAddOption={this.handleAddOption} />
       </div>
     );
-  }
+  };
 }
 
 IndecisionApp.defaultProps = {
